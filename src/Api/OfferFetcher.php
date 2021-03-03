@@ -48,15 +48,41 @@ class OfferFetcher
                 "query" => [
                     "range" => "0-9",
                     "sort"  => 0,
+                    "commune" => "33063",
+                    "distance" => 20
                 ]
             ]
         );
 
-        $data = $response->toArray()["resultats"];
+        $datas = $response->toArray()["resultats"];
 
+        /**
+         * Transform array to array of object for easier twig intergration
+         */
         $offers = array();
-        foreach ($data as $offer){
-            $offer = new Offer();
+        foreach ($datas as $data){
+
+            /**
+             * Check case of company name 
+             */
+            if(isset($data["entreprise"]['nom'])){
+                $company = $data["entreprise"]['nom'];
+            }elseif(empty($data["entreprise"])){
+                $company = "Inconnu \ non renseigné";
+            }else{
+                $company = $data["entreprise"];
+            }
+
+            $offer = new Offer(
+                $data["intitule"],
+                $data["description"],
+                $data["lieuTravail"]['libelle'],
+                $data['typeContrat'],
+                $company
+            );
+            $offers[] = $offer;
         }
+
+        return $offers;
     }
 }

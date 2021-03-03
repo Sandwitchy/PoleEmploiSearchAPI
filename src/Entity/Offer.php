@@ -42,6 +42,15 @@ class Offer
      */
     private $company;
 
+    public function __construct(string $name, string $description, string $city, string $contract, string $company){
+        $this->name = $name;
+        $this->description = $description;
+        $this->city = $city;
+        $this->contract = $contract;
+        $this->company = $company;
+    }
+
+
     public function getId(): ?int
     {
         return $this->id;

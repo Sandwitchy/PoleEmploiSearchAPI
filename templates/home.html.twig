@@ -15,7 +15,15 @@
                 </tr>
             </thead>
             <tbody>
-                
+                {% for offer in offers %}
+                    <tr>
+                        <td>{{offer.name}}</td>
+                        <td>{{offer.description}}</td>
+                        <td>{{offer.city}}</td>
+                        <td>{{offer.contract}}</td>
+                        <td>{{offer.company}}</td>
+                    </tr>
+                {% endfor %}
             </tbody>
         </table
     

@@ -15,7 +15,9 @@ class IndexController extends AbstractController
     public function index(OfferFetcher $offerFetcher): Response
     {
 
-        $offerFetcher->fetch();
-        return $this->render('home.html.twig');
+
+        return $this->render('home.html.twig',[
+            "offers" => $offerFetcher->fetch(),
+        ]);
     }
 }
